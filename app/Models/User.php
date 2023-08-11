@@ -14,7 +14,7 @@ class User extends Authenticatable
 
     public function address()
     {
-        return $this->belongsTo(Adress::class);
+        return $this->belongsTo(Address::class, 'address_id');
     }
 
     public function consultations()
@@ -30,7 +30,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'dateBirth',
+        'phone',
+        'workTime',
         'password',
+        'address_id'
     ];
 
     /**

@@ -5,9 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Adress extends Model
+class Address extends Model
 {
     protected $table = 'addresses';
+    protected $fillable = [
+        'cep',
+        'publicPlace',
+        'district',
+        'uf',
+        'city',
+        'num'
+    ];
 
     public function user()
     {

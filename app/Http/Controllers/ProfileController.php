@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Address;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -17,7 +20,8 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return view('users.index');
+        $users = User::all();
+        return view('users.index')->with('users', $users);
     }
     public function edit(Request $request): View
     {
@@ -61,5 +65,17 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function delete(Request $request)
+    {
+        $user = User::find($request->id);
+        DB::beginTransaction();
+        $user->address()->delete();
+        $user->delete();
+        DB::commit();
+        $request->session()->flash('message', "Usuário removido com sucesso!");
+
+        return redirect()->route('users.index');
     }
 }

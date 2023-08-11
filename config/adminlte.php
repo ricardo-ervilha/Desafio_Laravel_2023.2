@@ -308,17 +308,17 @@ return [
             'icon'        => 'fas fa-fw fa-tachometer-alt',
         ],
         [
-            'text'        => 'Gerenciar Usuários',
+            'text'        => 'Usuários',
             'url'         => '/users',
             'icon'        => 'fas fa-fw fa-users',
         ],
         [
-            'text'        => 'Gerenciar Proprietários',
+            'text'        => 'Proprietários',
             'url'         => 'admin/pages',
             'icon'        => 'fas fa-fw fa-house-user',
         ],
         [
-            'text'        => 'Gerenciar Animais',
+            'text'        => 'Animais',
             'url'         => 'admin/pages',
             'icon'        => 'fas fa-fw fa-paw',
         ],

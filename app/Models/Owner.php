@@ -11,7 +11,7 @@ class Owner extends Model
 
     public function address()
     {
-        return $this->belongsTo(Adress::class);
+        return $this->belongsTo(Address::class);
     }
 
     public function animals()

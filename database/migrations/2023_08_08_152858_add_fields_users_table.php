@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('address_id')->nullable();
             $table->string('phone')->nullable();
             $table->integer('workTime')->nullable();
-            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
         });
     }
 
