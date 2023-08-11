@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('isAdmin')->default(false);
-            $table->date('dateBirth')->nullable();
-            $table->unsignedBigInteger('address_id')->nullable();
-            $table->string('phone')->nullable();
-            $table->integer('workTime')->nullable();
+            $table->date('dateBirth');
+            $table->unsignedBigInteger('address_id');
+            $table->string('phone');
+            $table->integer('workTime');
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
         });
     }

@@ -34,7 +34,8 @@ class User extends Authenticatable
         'phone',
         'workTime',
         'password',
-        'address_id'
+        'address_id',
+        'isAdmin'
     ];
 
     /**

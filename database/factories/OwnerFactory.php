@@ -4,11 +4,12 @@ namespace Database\Factories;
 
 use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Psy\Util\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Owner>
  */
-class UserFactory extends Factory
+class OwnerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,10 +21,9 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'password' => fake()->password(),
-            'dateBirth' => fake()->date(),
-            'phone' => fake()->phoneNumber() ,
-            'workTime' => fake()->numberBetween(0, 24),
+            'cpf' => \Illuminate\Support\Str::random('10'),
+            'dateBirth' => fake()->date,
+            'phone' => fake()->phoneNumber(),
             'address_id' => function(){
                 $address = Address::create([
                     'cep' => '01001-000',
@@ -36,7 +36,7 @@ class UserFactory extends Factory
 
                 return $address->id;
             },
-            'isAdmin' => false
+            'profilePhoto' => fake()->filePath()
         ];
     }
 }
