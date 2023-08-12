@@ -36,7 +36,6 @@ class OwnerFactory extends Factory
 
                 return $address->id;
             },
-            'profilePhoto' => fake()->filePath()
         ];
     }
 }

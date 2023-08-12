@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('dateBirth');
             $table->unsignedBigInteger('address_id');
             $table->string('phone');
-            $table->string('profilePhoto');
+            $table->string('profilePhoto')->nullable();
             $table->foreign('address_id')->references('id')->on('addresses');
             $table->timestamps();
         });

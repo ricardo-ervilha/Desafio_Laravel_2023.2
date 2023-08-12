@@ -314,7 +314,7 @@ return [
         ],
         [
             'text'        => 'Proprietários',
-            'url'         => 'admin/pages',
+            'url'         => '/owners',
             'icon'        => 'fas fa-fw fa-house-user',
         ],
         [
