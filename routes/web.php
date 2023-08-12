@@ -37,6 +37,7 @@ Route::post('/users/delete/{id}', [ProfileController::class, 'delete']);
 /*Rotas de Gerenciamento de Proprietários*/
 Route::get('/owners', [\App\Http\Controllers\OwnerController::class, 'index'])->name('owners.index');
 Route::post('/owners/store', [\App\Http\Controllers\OwnerController::class, 'store'])->name('owners.create');
-
+Route::post('/owners/delete/{id}', [\App\Http\Controllers\OwnerController::class, 'delete']);
+Route::post('/owners/edit/{id}', [\App\Http\Controllers\OwnerController::class, 'edit']);
 
 require __DIR__.'/auth.php';

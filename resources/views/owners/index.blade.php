@@ -300,6 +300,144 @@
                                 </div>
                             </div>
 
+                            <button style="margin-right: 5px;" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEditar{{$owner->id}}"><i class="fas fa-edit"></i></button>
+
+
+                            <!-- Modal Editar -->
+                            <div class="modal fade" id="modalEditar{{$owner->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Editar Proprietário</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="card card-primary">
+
+                                                <form action="/owners/edit/{{$owner->id}}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div id="step-1" class="row step">
+                                                        <div class="col-sm">
+
+                                                            <div style="padding-bottom: 0 !important;" class="card-body">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputEmail1">Nome Completo</label>
+                                                                    <input required value="{{$owner->name}}" name="name" type="text" class="form-control" id="name" placeholder="Digite o nome">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">E-mail</label>
+                                                                    <input required value="{{$owner->email}}" name="email" type="text" class="form-control" id="email" placeholder="Digite o e-mail">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">Data de Nascimento</label>
+                                                                    <input required value="{{$owner->dateBirth}}" name="dateBirth" type="date" class="form-control" id="dateBirth">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">Telefone</label>
+                                                                    <input  required value="{{$owner->phone}}" name="phone" type="tel" maxlength="15" class="form-control phone" id="phone" placeholder="Digite o telefone">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">CPF</label>
+                                                                    <input maxlength="14" value="{{$owner->cpf}}" required name="cpf" type="text" class="form-control cpf" id="cpf" placeholder="Digite o cpf">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputFile">Foto de Perfil</label>
+                                                                    <div class="input-group">
+                                                                        <div class="custom-file">
+                                                                            <input name="profilePhoto" class="form-control" type="file" id="profilePhoto">
+                                                                            <label for="formFile" class="form-label"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-sm">
+
+                                                            <div style="padding-bottom: 0 !important;" class="card-body">
+
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputEmail1">CEP</label>
+                                                                    <input value="{{$owner->address->cep}}" required maxlength="9" name="cep" type="text" class="form-control cep" id="cep" placeholder="Digite o cep">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">Cidade</label>
+                                                                    <input value="{{$owner->address->city}}" required name="city" type="text" class="form-control" id="city" placeholder="Digite a cidade">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">Unidade Federativa</label>
+                                                                    <select name="uf" id="uf" class="form-control">
+                                                                        <option {{$owner->address->uf == 'AC' ? 'selected' : ''}} value="AC">AC</option>
+                                                                        <option {{$owner->address->uf == 'AL' ? 'selected' : ''}} value="AL">AL</option>
+                                                                        <option {{$owner->address->uf == 'AP' ? 'selected' : ''}} value="AP">AP</option>
+                                                                        <option {{$owner->address->uf == 'AM' ? 'selected' : ''}} value="AM">AM</option>
+                                                                        <option {{$owner->address->uf == 'BA' ? 'selected' : ''}} value="BA">BE</option>
+                                                                        <option {{$owner->address->uf == 'CE' ? 'selected' : ''}} value="CE">CE</option>
+                                                                        <option {{$owner->address->uf == 'DF' ? 'selected' : ''}} value="DF">DF</option>
+                                                                        <option {{$owner->address->uf == 'ES' ? 'selected' : ''}} value="ES">ES</option>
+                                                                        <option {{$owner->address->uf == 'GO' ? 'selected' : ''}} value="GO">GO</option>
+                                                                        <option {{$owner->address->uf == 'MA' ? 'selected' : ''}} value="MA">MA</option>
+                                                                        <option {{$owner->address->uf == 'MT' ? 'selected' : ''}} value="MT">MT</option>
+                                                                        <option {{$owner->address->uf == 'MS' ? 'selected' : ''}} value="MS">MS</option>
+                                                                        <option {{$owner->address->uf == 'MG' ? 'selected' : ''}} value="MG">MG</option>
+                                                                        <option {{$owner->address->uf == 'PA' ? 'selected' : ''}} value="PA">PA</option>
+                                                                        <option {{$owner->address->uf == 'PB' ? 'selected' : ''}} value="PB">PB</option>
+                                                                        <option {{$owner->address->uf == 'PR' ? 'selected' : ''}} value="PR">PR</option>
+                                                                        <option {{$owner->address->uf == 'PE' ? 'selected' : ''}} value="PE">PE</option>
+                                                                        <option {{$owner->address->uf == 'PI' ? 'selected' : ''}} value="PI">PI</option>
+                                                                        <option {{$owner->address->uf == 'RJ' ? 'selected' : ''}} value="RJ">RJ</option>
+                                                                        <option {{$owner->address->uf == 'RN' ? 'selected' : ''}} value="RN">RN</option>
+                                                                        <option {{$owner->address->uf == 'RS' ? 'selected' : ''}} value="RS">RS</option>
+                                                                        <option {{$owner->address->uf == 'RO' ? 'selected' : ''}} value="RO">RO</option>
+                                                                        <option {{$owner->address->uf == 'RR' ? 'selected' : ''}} value="RR">RR</option>
+                                                                        <option {{$owner->address->uf == 'SC' ? 'selected' : ''}} value="SC">SC</option>
+                                                                        <option {{$owner->address->uf == 'SP' ? 'selected' : ''}} value="SP">SP</option>
+                                                                        <option {{$owner->address->uf == 'SE' ? 'selected' : ''}} value="SE">SE</option>
+                                                                        <option {{$owner->address->uf == 'TO' ? 'selected' : ''}} value="TO">TO</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputEmail1">Logradouro</label>
+                                                                    <input value="{{$owner->address->publicPlace}}"  required name="publicPlace" type="text" class="form-control" id="street" placeholder="Digite o logradouro">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">Bairro</label>
+                                                                    <input value="{{$owner->address->district}}"  required name="district" type="text" class="form-control" id="district" placeholder="Digite o bairro">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1">Número</label>
+                                                                    <input value="{{$owner->address->num}}" required name="num" type="number" class="form-control" id="num" placeholder="Digite o número">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div style="display: flex; align-items: center; justify-content: flex-end" class="card-footer">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--Fim Modal Editar-->
+
 
                             <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDeletar{{$owner->id}}">
                                 <i class="fas fa-trash" aria-hidden="true"></i>
@@ -318,7 +456,7 @@
                                         <div class="modal-body">
                                             Deseja realmente deletar <strong>{{$owner->name}}</strong> ?
                                         </div>
-                                        <form action="/users/delete/{{$owner->id}}" method="POST">
+                                        <form action="/owners/delete/{{$owner->id}}" method="POST">
                                             @csrf
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

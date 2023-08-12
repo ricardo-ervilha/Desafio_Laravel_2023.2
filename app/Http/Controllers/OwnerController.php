@@ -58,7 +58,6 @@ class OwnerController extends Controller
         $owner = new Owner([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
             'dateBirth' => $request->dateBirth,
             'phone' => $request->phone,
             'cpf' => $request->cpf,
@@ -74,5 +73,52 @@ class OwnerController extends Controller
         $request->session()->flash('message', 'Proprietário cadastrado com sucesso!');
 
         return redirect('/owners');
+    }
+
+    public function delete(Request $request)
+    {
+        $owner = Owner::find($request->id);
+        DB::beginTransaction();
+        $owner->address()->delete();
+        $owner->delete();
+        DB::commit();
+        $request->session()->flash('message', "Proprietário removido com sucesso!");
+
+        return redirect()->route('owners.index');
+    }
+
+    public function edit(Request $request){
+        $owner = Owner::find($request->id);
+
+        $profilePhoto = null;
+
+        if($request->hasFile('profilePhoto')){
+
+            $profilePhoto = $request->file('profilePhoto')->store('public/avatars');
+
+        }
+        $profilePhoto = str_replace("public/", "", $profilePhoto);
+
+        $owner->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'dateBirth' => $request->dateBirth,
+            'phone' => $request->phone,
+            'cpf' => $request->cpf,
+            'profilePhoto' => $profilePhoto
+        ]);
+
+        $owner->address()->update([
+            'cep' => $request->cep,
+            'publicPlace' => $request->publicPlace,
+            'district' => $request->district,
+            'uf' => $request->uf,
+            'city' => $request->city,
+            'num' => $request->num
+        ]);
+
+        $request->session()->flash('message', "Dados alterados com sucesso!");
+
+        return redirect()->route('owners.index');
     }
 }
