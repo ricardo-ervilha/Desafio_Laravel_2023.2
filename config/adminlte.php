@@ -319,7 +319,7 @@ return [
         ],
         [
             'text'        => 'Animais',
-            'url'         => 'admin/pages',
+            'url'         => '/animals',
             'icon'        => 'fas fa-fw fa-paw',
         ],
         [

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\Animal;
 use App\Models\Owner;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -78,10 +79,22 @@ class OwnerController extends Controller
     public function delete(Request $request)
     {
         $owner = Owner::find($request->id);
+
         DB::beginTransaction();
+
+        //Deleta os animais do proprietário
+        $animals = $owner->animals;
+
+        foreach($animals as $animal){
+            $animal->delete();
+        }
+
+        //Deleta o proprietário e seu endereço
         $owner->address()->delete();
         $owner->delete();
+
         DB::commit();
+
         $request->session()->flash('message', "Proprietário removido com sucesso!");
 
         return redirect()->route('owners.index');

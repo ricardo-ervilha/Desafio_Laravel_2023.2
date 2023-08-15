@@ -40,4 +40,10 @@ Route::post('/owners/store', [\App\Http\Controllers\OwnerController::class, 'sto
 Route::post('/owners/delete/{id}', [\App\Http\Controllers\OwnerController::class, 'delete']);
 Route::post('/owners/edit/{id}', [\App\Http\Controllers\OwnerController::class, 'edit']);
 
+/*Rotas de Gerenciamento de Animais*/
+Route::get('/animals', [\App\Http\Controllers\AnimalController::class, 'index']);
+Route::post('/animals/create', [\App\Http\Controllers\AnimalController::class, 'create']);
+Route::post('/animals/delete/{id}', [\App\Http\Controllers\AnimalController::class, 'delete']);
+Route::post('/animals/edit/{id}', [\App\Http\Controllers\AnimalController::class, 'edit']);
+
 require __DIR__.'/auth.php';
