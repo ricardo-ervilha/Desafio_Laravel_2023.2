@@ -320,11 +320,11 @@ return [
         [
             'text'        => 'Animais',
             'url'         => '/animals',
-            'icon'        => 'fas fa-fw fa-paw',
+            'icon'        => 'fas fa-fw fa-dog',
         ],
         [
             'text'        => 'Consultas',
-            'url'         => 'admin/pages',
+            'url'         => '/consultations',
             'icon'        => 'fas fa-fw fa-clipboard-list',
         ],
         [

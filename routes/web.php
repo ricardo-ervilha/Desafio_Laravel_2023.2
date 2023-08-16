@@ -46,4 +46,9 @@ Route::post('/animals/create', [\App\Http\Controllers\AnimalController::class, '
 Route::post('/animals/delete/{id}', [\App\Http\Controllers\AnimalController::class, 'delete']);
 Route::post('/animals/edit/{id}', [\App\Http\Controllers\AnimalController::class, 'edit']);
 
+/*Rotas de Consultas*/
+Route::get('/consultations', [\App\Http\Controllers\ConsultationController::class, 'index']);
+Route::get('/owner-animals/{id}', [\App\Http\Controllers\ConsultationController::class, 'animals']);
+Route::post('/consultations/create', [\App\Http\Controllers\ConsultationController::class, 'create']);
+
 require __DIR__.'/auth.php';

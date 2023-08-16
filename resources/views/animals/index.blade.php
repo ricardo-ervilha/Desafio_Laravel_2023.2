@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <button style="margin-left: 1rem" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fas fa-user-plus"></i>
+                        <i class="fas fa-paw"></i>
                     </button>
                 </div>
             </div>

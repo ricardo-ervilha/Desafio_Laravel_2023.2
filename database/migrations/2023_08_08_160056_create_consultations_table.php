@@ -16,7 +16,7 @@ return new class extends Migration
             $table->dateTime('startDate');
             $table->dateTime('endDate');
             $table->float('coast');
-            $table->unsignedBigInteger('treatment_id');
+            $table->unsignedBigInteger('treatment_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('animal_id');
             $table->foreign('treatment_id')->references('id')->on('treatments');

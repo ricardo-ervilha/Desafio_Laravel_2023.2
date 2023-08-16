@@ -9,6 +9,14 @@ class Consultation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'startDate',
+        'endDate',
+        'coast',
+        'user_id',
+        'animal_id'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
