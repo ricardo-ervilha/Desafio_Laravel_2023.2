@@ -220,9 +220,75 @@
                             <!--Fim Modal Visualização-->
 
 
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="">
+                            <button onclick="popularTextareas({{$consultation->id}}, '{{$consultation->treatment == null ? '' : $consultation->treatment->diagnostic}}', '{{$consultation->treatment == null ? '' : $consultation->treatment->guidelines}}', '{{$consultation->treatment == null ? '' : $consultation->treatment->medicines}}', '{{$consultation->treatment == null ? '' : $consultation->treatment->extraInfos}}')" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalTratamento{{$consultation->id}}">
                                 <i class="fas fa-solid fa-prescription" aria-hidden="true"></i>
                             </button>
+
+                            <!-- Modal Cadastrar Tratamento -->
+                            <div class="modal fade" id="modalTratamento{{$consultation->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Adicionar Tratamento</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="card card-primary">
+
+                                                <form action="/consultations/{{$consultation->id}}/treatment/create" method="POST">
+                                                    @csrf
+                                                    <div id="step-1" class="row step">
+                                                        <div class="col-sm">
+
+                                                            <div style="padding-bottom: 0 !important;" class="card-body">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputEmail1">Diagnóstico</label>
+                                                                    <textarea name="diagnostic" id="diagnostic{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite o diagnóstico"></textarea>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputEmail1">Orientações</label>
+                                                                    <textarea name="guidelines" id="guidelines{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite as orientações"></textarea>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-sm">
+
+                                                            <div style="padding-bottom: 0 !important;" class="card-body">
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputEmail1">Medicamentos</label>
+                                                                    <textarea name="medicines" id="medicines{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite os medicamentos"></textarea>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputEmail1">Informações Adicionais</label>
+                                                                    <textarea name="extraInfos" id="extraInfos{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite as informações adicionais"></textarea>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div style="display: flex; align-items: center; justify-content: flex-end" class="card-footer">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--Fim Modal Cadastrar Tratamento-->
                         </td>
                     </tr>
                 @endforeach
@@ -279,5 +345,24 @@
                 }
             });
         });
+
+        function popularTextareas(consultId, diagnostic, guidelines, medicines, extraInfos) {
+            var diagnosticElement = document.getElementById(`diagnostic${consultId}`);
+            var guidelinesElement = document.getElementById(`guidelines${consultId}`);
+            var medicinesElement = document.getElementById(`medicines${consultId}`);
+            var extraInfosElement = document.getElementById(`extraInfos${consultId}`);
+
+            if(diagnostic != ''){
+                diagnosticElement.value = diagnostic;
+                diagnosticElement.disabled = true;
+                guidelinesElement.value = guidelines;
+                guidelinesElement.disabled = true;
+                medicinesElement.value = medicines;
+                medicinesElement.disabled = true;
+                extraInfosElement.value = extraInfos;
+                extraInfosElement.disabled = true;
+            }
+
+        }
     </script>
 @stop

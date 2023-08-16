@@ -50,5 +50,6 @@ Route::post('/animals/edit/{id}', [\App\Http\Controllers\AnimalController::class
 Route::get('/consultations', [\App\Http\Controllers\ConsultationController::class, 'index']);
 Route::get('/owner-animals/{id}', [\App\Http\Controllers\ConsultationController::class, 'animals']);
 Route::post('/consultations/create', [\App\Http\Controllers\ConsultationController::class, 'create']);
+Route::post('/consultations/{id}/treatment/create', [\App\Http\Controllers\ConsultationController::class, 'createTreatment']);
 
 require __DIR__.'/auth.php';

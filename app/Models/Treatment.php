@@ -9,6 +9,13 @@ class Treatment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'diagnostic',
+        'guidelines',
+        'medicines',
+        'extraInfos'
+    ];
+
     public function consultation()
     {
         return $this->hasOne(Consultation::class);

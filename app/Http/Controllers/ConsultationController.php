@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Animal;
 use App\Models\Consultation;
 use App\Models\Owner;
+use App\Models\Treatment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,22 @@ class ConsultationController extends Controller
             'animal_id'=> ['required']
         ]);
 
+        if($request->startDate >= $request->endDate){
+            //Handle Error para caso o horário de início seja maior igual ao horário de término.
+
+            return back()->with('message', 'Horário de início está igual ou depois do horário de término!');
+        }
+
+        $consultations = DB::table('consultations')->where('user_id', '=', Auth::user()->id)->get();
+
+        foreach($consultations as $consult){
+            if($request->startDate >= $consult->startDate && $request->startDate < $consult->endDate){
+                return back()->with('message', 'Conflito de horário!');
+            }else if($request->startDate <= $consult->startDate && $request->endDate > $consult->startDate){
+                return back()->with('message', 'Conflito de horário!');
+            }
+        }
+
         $coast = str_replace('R$ ', '', $request->coast);
         $coast = str_replace(',', '.', $coast);
 
@@ -59,6 +76,36 @@ class ConsultationController extends Controller
         DB::commit();
 
         $request->session()->flash('message', 'Consulta agendada com sucesso!');
+
+        return redirect('/consultations');
+    }
+
+    public function createTreatment(Request $request)
+    {
+        $request->validate([
+            'diagnostic' => ['required'],
+            'guidelines' => ['required'],
+            'medicines' => ['required'],
+            'extraInfos'=> ['required']
+        ]);
+
+        DB::beginTransaction();
+
+        $treatment = new Treatment([
+            'diagnostic' => $request->diagnostic,
+            'guidelines' => $request->guidelines,
+            'medicines' => $request->medicines,
+            'extraInfos'=> $request->extraInfos
+        ]);
+        $treatment->save();
+
+        $consultation = Consultation::find($request->id);
+        $consultation->treatment()->associate($treatment);
+        $consultation->update();
+
+        DB::commit();
+
+        $request->session()->flash('message', 'Tratamento adicionado com sucesso!');
 
         return redirect('/consultations');
     }
