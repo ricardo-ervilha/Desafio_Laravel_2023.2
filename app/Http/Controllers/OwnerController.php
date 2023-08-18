@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Hash;
 
 class OwnerController extends Controller
 {
+    //Rever depois onde esse método irá ficar.
+    public function emailIndex()
+    {
+        return view('mail.message');
+    }
+
     public function index()
     {
         $owners = Owner::all();

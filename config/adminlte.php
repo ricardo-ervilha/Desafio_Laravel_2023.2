@@ -329,7 +329,7 @@ return [
         ],
         [
             'text'        => 'Enviar e-mail',
-            'url'         => 'admin/pages',
+            'url'         => '/write-email',
             'icon'        => 'fas fa-fw fa-envelope',
         ],
         [

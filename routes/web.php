@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Mail\OrderShipped;
+use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,5 +56,22 @@ Route::get('/consultations', [\App\Http\Controllers\ConsultationController::clas
 Route::get('/owner-animals/{id}', [\App\Http\Controllers\ConsultationController::class, 'animals']);
 Route::post('/consultations/create', [\App\Http\Controllers\ConsultationController::class, 'create']);
 Route::post('/consultations/{id}/treatment/create', [\App\Http\Controllers\ConsultationController::class, 'createTreatment']);
+
+/*Envio de e-mail*/
+Route::get('/write-email', [\App\Http\Controllers\OwnerController::class, 'emailIndex']);
+
+Route::get('/send-email', function(){
+
+    $email = new App\Mail\SendEmailToOwners('Boa tarde! Sejam bem-vindos.');
+
+    $user = (object) [
+        'email' => 'teste@gmail.com',
+        'name' => 'Ricardo'
+    ];
+
+    Mail::to($user)->send($email);
+
+    return 'E-mail enviado com sucesso!';
+});
 
 require __DIR__.'/auth.php';
