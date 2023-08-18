@@ -45,7 +45,10 @@ class ConsultationController extends Controller
 
         $consultations = DB::table('consultations')->where('user_id', '=', Auth::user()->id)->get();
 
+        $request->startDate = str_replace('T', ' ', $request->startDate);
+        $request->endDate = str_replace('T', ' ', $request->endDate);
         foreach($consultations as $consult){
+
             if($request->startDate >= $consult->startDate && $request->startDate < $consult->endDate){
                 return back()->with('message', 'Conflito de horário!');
             }else if($request->startDate <= $consult->startDate && $request->endDate > $consult->startDate){

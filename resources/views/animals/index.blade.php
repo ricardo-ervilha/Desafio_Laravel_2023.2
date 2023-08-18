@@ -207,6 +207,67 @@
                                 </div>
                             </div>
 
+                            <button style="margin-right: 5px;" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalTratamentos{{$animal->id}}">
+                                <i class="fas fa-solid fa-stethoscope" aria-hidden="true"></i>
+                            </button>
+
+                            <!-- Modal Tratamentos -->
+                            <div class="modal fade" id="modalTratamentos{{$animal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Tratamentos do Animal</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
+
+                                            @foreach($animalConsultations[$animal->id] as $index => $consult)
+
+                                                <div id="step{{$index}}" class="card card-primary {{$index != 0 ? 'd-none' : ''}}">
+                                                    <div class="card-header">
+
+                                                        <h3 class="card-title">Consulta iniciada em <strong> {{$consult->startDate}}</strong> e terminada em
+                                                            <strong>{{$consult->endDate}}</strong></h3>
+                                                    </div>
+
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Funcionário</label>
+                                                            <input disabled value="{{\App\Models\User::find($consult->user_id)->name}}" name="user" id="user" type="text" class="form-control" rows="3">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Diagnóstico</label>
+                                                            <textarea disabled name="diagnostic" id="diagnostic" class="form-control" rows="3">{{\App\Models\Treatment::find($consult->treatment_id)->diagnostic}}</textarea>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Medicamentos</label>>
+                                                            <textarea disabled value="" name="diagnostic" id="medicines" class="form-control" rows="3">{{\App\Models\Treatment::find($consult->treatment_id)->medicines}}</textarea>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            @endforeach
+
+                                                <div style="display: flex; align-items: center; justify-content: flex-end" class="card-footer">
+                                                    <button onclick="atualizarModalPrev()" type="button" id="nextBtn" class="btn btn-primary">Prev</button>
+                                                    <button style="margin-left: 1rem;" onclick="atualizarModalNext({{count($animalConsultations[$animal->id])}})" type="button" id="nextBtn" class="btn btn-primary">Next</button>
+                                                </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--Fim Modal Tratamentos-->
+
+
+
                             <button style="margin-right: 5px;" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEditar{{$animal->id}}"><i class="fas fa-edit"></i></button>
 
                             <!-- Modal Editar -->
@@ -274,7 +335,6 @@
                             </div>
                             <!--Fim Modal Editar-->
 
-
                             <button style="margin-right: 5px;" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDeletar{{$animal->id}}">
                                 <i class="fas fa-trash" aria-hidden="true"></i>
                             </button>
@@ -304,9 +364,6 @@
                                 </div>
                             </div>
 
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="">
-                                <i class="fas fa-solid fa-stethoscope" aria-hidden="true"></i>
-                            </button>
                         </td>
                     </tr>
                 @endforeach
@@ -335,6 +392,36 @@
 @section('js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
+        let currentStep = 0;
+
+        function atualizarModalPrev() {
+
+            if(currentStep >= 1){
+                // Esconder o passo atual
+                $("#step" + currentStep).addClass("d-none");
+
+                // Decrementar para o próximo passo
+                currentStep--;
+
+                // Mostrar o próximo passo
+                $("#step" + currentStep).removeClass("d-none");
+            }
+        }
+
+        function atualizarModalNext(val) {
+            // alert(val);
+            if(currentStep < val-1){
+                // Esconder o passo atual
+                $("#step" + currentStep).addClass("d-none");
+
+                // Incrementar para o próximo passo
+                currentStep++;
+
+                // Mostrar o próximo passo
+                $("#step" + currentStep).removeClass("d-none");
+            }
+        }
 
     </script>
 @stop

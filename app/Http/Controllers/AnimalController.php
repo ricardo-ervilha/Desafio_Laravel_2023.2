@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Animal;
+use App\Models\Consultation;
 use App\Models\Owner;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +15,14 @@ class AnimalController extends Controller
     {
         $animals = Animal::all();
         $owners = Owner::all();
-        return view('animals.index')->with('animals', $animals)->with('owners', $owners);
+        $animalConsultations = null;
+        foreach($animals as $animal){
+            $animalConsultations[$animal->id] = $consultations = DB::table('consultations')
+                ->join('treatments', 'consultations.treatment_id', '=', 'treatments.id')
+                ->where('consultations.animal_id', '=', $animal->id)->get();
+        }
+
+        return view('animals.index')->with('animals', $animals)->with('owners', $owners)->with('animalConsultations', $animalConsultations);
     }
 
     public function create(Request $request)
