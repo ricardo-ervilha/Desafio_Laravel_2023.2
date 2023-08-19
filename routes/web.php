@@ -58,20 +58,9 @@ Route::post('/consultations/create', [\App\Http\Controllers\ConsultationControll
 Route::post('/consultations/{id}/treatment/create', [\App\Http\Controllers\ConsultationController::class, 'createTreatment']);
 
 /*Envio de e-mail*/
-Route::get('/write-email', [\App\Http\Controllers\OwnerController::class, 'emailIndex']);
+Route::get('/email/index', [\App\Http\Controllers\MailController::class, 'index']);
 
-Route::get('/send-email', function(){
+Route::post('/email/send', [\App\Http\Controllers\MailController::class, 'send']);
 
-    $email = new App\Mail\SendEmailToOwners('Boa tarde! Sejam bem-vindos.');
-
-    $user = (object) [
-        'email' => 'teste@gmail.com',
-        'name' => 'Ricardo'
-    ];
-
-    Mail::to($user)->send($email);
-
-    return 'E-mail enviado com sucesso!';
-});
 
 require __DIR__.'/auth.php';

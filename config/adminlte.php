@@ -329,7 +329,7 @@ return [
         ],
         [
             'text'        => 'Enviar e-mail',
-            'url'         => '/write-email',
+            'url'         => '/email/index',
             'icon'        => 'fas fa-fw fa-envelope',
         ],
         [

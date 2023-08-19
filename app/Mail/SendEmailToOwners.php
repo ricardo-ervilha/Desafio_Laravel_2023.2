@@ -13,13 +13,18 @@ class SendEmailToOwners extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $body_email;
+    public $header, $greetings, $firstParagraph, $secondParagraph, $thanks, $authorName;
     /**
      * Create a new message instance.
      */
-    public function __construct($body_email)
+    public function __construct($header, $greetings, $firstParagraph, $secondParagraph, $thanks, $authorName)
     {
-        $this->body_email = $body_email;
+        $this->header = $header;
+        $this->greetings = $greetings;
+        $this->firstParagraph = $firstParagraph;
+        $this->secondParagraph = $secondParagraph;
+        $this->thanks = $thanks;
+        $this->authorName = $authorName;
     }
 
     /**
@@ -28,7 +33,7 @@ class SendEmailToOwners extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Email To Owners',
+            subject: 'E-mail Clínica Veterinária',
         );
     }
 
@@ -38,7 +43,7 @@ class SendEmailToOwners extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.email',
+            markdown: 'mail.email',
         );
     }
 
