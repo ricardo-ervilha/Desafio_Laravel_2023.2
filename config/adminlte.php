@@ -334,7 +334,7 @@ return [
         ],
         [
             'text'        => 'Emitir relatório',
-            'url'         => 'admin/pages',
+            'url'         => '/pdf/index',
             'icon'        => 'fas fa-fw fa-file-alt',
         ],
 

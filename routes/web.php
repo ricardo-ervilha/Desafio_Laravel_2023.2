@@ -59,8 +59,10 @@ Route::post('/consultations/{id}/treatment/create', [\App\Http\Controllers\Consu
 
 /*Envio de e-mail*/
 Route::get('/email/index', [\App\Http\Controllers\MailController::class, 'index']);
-
 Route::post('/email/send', [\App\Http\Controllers\MailController::class, 'send']);
 
+/*Geração do Relatório*/
+Route::get('/pdf/index', [\App\Http\Controllers\PdfController::class, 'index']);
+Route::post('/pdf/generate', [\App\Http\Controllers\PdfController::class, 'generate']);
 
 require __DIR__.'/auth.php';
