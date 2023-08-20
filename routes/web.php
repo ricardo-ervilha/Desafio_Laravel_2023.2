@@ -35,9 +35,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 /*Rotas de Gerenciamento de Usuários*/
-Route::get('/users', [ProfileController::class, 'index'])->name('users.index');
-Route::post('/users/store', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])->name('users.create');
-Route::post('/users/delete/{id}', [ProfileController::class, 'delete']);
+Route::get('/users', [ProfileController::class, 'index'])->name('users.index')->can('isAdmin', '\App\Models\User');
+Route::post('/users/store', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])->name('users.create')->can('isAdmin', '\App\Models\User');
+Route::post('/users/delete/{id}', [ProfileController::class, 'delete'])->can('isAdmin', '\App\Models\User');
 
 /*Rotas de Gerenciamento de Proprietários*/
 Route::get('/owners', [\App\Http\Controllers\OwnerController::class, 'index'])->name('owners.index');
@@ -58,8 +58,8 @@ Route::post('/consultations/create', [\App\Http\Controllers\ConsultationControll
 Route::post('/consultations/{id}/treatment/create', [\App\Http\Controllers\ConsultationController::class, 'createTreatment']);
 
 /*Envio de e-mail*/
-Route::get('/email/index', [\App\Http\Controllers\MailController::class, 'index']);
-Route::post('/email/send', [\App\Http\Controllers\MailController::class, 'send']);
+Route::get('/email/index', [\App\Http\Controllers\MailController::class, 'index'])->can('isAdmin', '\App\Models\User');;
+Route::post('/email/send', [\App\Http\Controllers\MailController::class, 'send'])->can('isAdmin', '\App\Models\User');;
 
 /*Geração do Relatório*/
 Route::get('/pdf/index', [\App\Http\Controllers\PdfController::class, 'index']);

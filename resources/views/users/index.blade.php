@@ -23,6 +23,10 @@
         </div>
     @endif
 
+{{--    @can('isAdmin', '\App\Models\User')--}}
+{{--        <p>Só mostra o parágrafo para quem é administrador.</p>--}}
+{{--    @endcan--}}
+
     <div class="card">
         <div  class="card-header">
             <div style="align-items: center" class="row">
