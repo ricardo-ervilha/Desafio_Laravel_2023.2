@@ -105,12 +105,25 @@
             margin-left: 1rem;
             margin-bottom: -0.1rem;
         }
+
+        .img{
+            text-align: center;
+        }
+
+        .assinature{
+            position:absolute;
+            left: 190px;
+            bottom: 0px;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Relatório de Consultas</h1>
     </div>
+
+
+    <div class="img"><img width="300" src="{{base_path()}}\public\img\logo-fundotransp.png" alt=""></div>
 
     <div class="data">
         <div class="sec1">
@@ -152,9 +165,9 @@
                 @endforeach
             </table>
         @endif
-        <footer> <span>© 2023 Laravel. All Rights Reserved.</span> <span class="page"></span></footer>
+        <footer> <span>© 2023 Laravel PetClinic. All Rights Reserved.</span> <span class="page"></span></footer>
     @endfor
 
-
+    <div class="assinature"><img src="{{base_path()}}\public\img\assinatura.png" alt=""></div>
 </body>
 </html>

@@ -83,7 +83,7 @@
             valign="top"
             align="center">
 
-            © 2023 Laravel. All Rights Reserved.
+            © 2023 Laravel PetClinic. All Rights Reserved.
 
         </td>
     </tr>
