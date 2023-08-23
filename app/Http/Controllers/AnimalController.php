@@ -21,6 +21,7 @@ class AnimalController extends Controller
                 ->join('treatments', 'consultations.treatment_id', '=', 'treatments.id')
                 ->where('consultations.animal_id', '=', $animal->id)->get();
         }
+//        dd($animalConsultations);
 
         return view('animals.index')->with('animals', $animals)->with('owners', $owners)->with('animalConsultations', $animalConsultations);
     }

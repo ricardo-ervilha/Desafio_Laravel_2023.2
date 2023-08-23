@@ -30,9 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 /*Rotas da Dashboard*/
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'view'])->middleware(['auth', 'verified'])->name('dashboard');
 
 /*Rotas de Gerenciamento de Usuários*/
 Route::get('/users', [ProfileController::class, 'index'])->name('users.index')->can('isAdmin', '\App\Models\User');

@@ -26,7 +26,7 @@ class OwnerController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'dateBirth' => ['required'],
             'phone' => ['required'],
-            'cpf' => ['required'],
+            'cpf' => ['required', 'cpf'],
             'cep' => ['required'],
             'publicPlace' => ['required', 'string', 'max:255'],
             'district' => ['required', 'string', 'max:255'],
@@ -102,6 +102,14 @@ class OwnerController extends Controller
     }
 
     public function edit(Request $request){
+        $request->validate([
+            'name' => ['string', 'max:255'],
+            'email' => ['string', 'email', 'max:255', 'unique:'.User::class],
+            'cpf' => ['cpf'],
+            'publicPlace' => ['string', 'max:255'],
+            'district' => ['string', 'max:255'],
+        ]);
+
         $owner = Owner::find($request->id);
 
         $profilePhoto = null;

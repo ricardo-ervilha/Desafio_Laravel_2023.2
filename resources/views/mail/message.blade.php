@@ -22,29 +22,28 @@
             @csrf
             <div class="card-body">
                 <label for="h2">Título</label>
-                <input type="text" name="header" class="form-control" placeholder="Título...">
+                <input type="text" name="header" class="form-control" placeholder="Ex: Promoção Especial para Nossos Queridos Animais!">
             </div>
             <div class="card-body">
                 <label for="h2">Saudações</label>
-                <input type="text" name="greetings" class="form-control" placeholder="Saudações...">
+                <input type="text" name="greetings" class="form-control" placeholder="Ex: Prezados Amantes de Animais,">
             </div>
             <div class="card-body">
                 <label for="firstParagraph">Primeiro parágrafo</label>
-                <textarea name="firstParagraph" class="form-control" rows="4" placeholder="Primeira parte..."></textarea>
+                <textarea name="firstParagraph" class="form-control" rows="4" placeholder="Ex:  Esperamos que este e-mail encontre vocês e seus amados companheiros peludos..."></textarea>
             </div>
             <div class="card-body">
                 <label for="h2">Segundo parágrafo</label>
-                <textarea name="secondParagraph" class="form-control" rows="4" placeholder="Segunda parte..."></textarea>
+                <textarea name="secondParagraph" class="form-control" rows="4" placeholder="Ex: Como forma de expressar nossa gratidão pela confiança que vocês depositam em nossos serviços, estamos empolgados..."></textarea>
             </div>
             <div class="card-body">
                 <label for="h2">Agradecimentos</label>
-                <input type="text" name="thanks" class="form-control"  placeholder="Agradecimentos...">
+                <input type="text" name="thanks" class="form-control"  placeholder="Ex: A equipe da Clínica Veterinária gostaria de agradecer a cada um de vocês por...">
             </div>
             <div class="card-footer">
                 <div class="float-right">
                     <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Enviar</button>
                 </div>
-                <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Limpar</button>
             </div>
         </form>
 

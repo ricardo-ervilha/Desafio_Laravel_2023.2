@@ -322,7 +322,7 @@
         $(document).ready(function() {
             $('#valorMonetario').maskMoney({
                 prefix: 'R$ ',     // Prefixo para o símbolo monetário
-                thousands: '.',    // Separador de milhares
+                thousands: '',    // Separador de milhares
                 decimal: ',',      // Separador decimal
                 affixesStay: true, // Manter o prefixo e sufixo sempre visíveis
                 allowZero: true    // Permitir que o valor seja zero

@@ -226,7 +226,7 @@
 
                                             @foreach($animalConsultations[$animal->id] as $index => $consult)
 
-                                                <div id="step{{$index}}" class="card card-primary {{$index != 0 ? 'd-none' : ''}}">
+                                                <div id="step{{$index}}{{$animal->id}}" class="card card-primary {{$index != 0 ? 'd-none' : ''}}" data-current-step="{{$index}}">
                                                     <div class="card-header">
 
                                                         <h3 class="card-title">Consulta iniciada em <strong> {{$consult->startDate}}</strong> e terminada em
@@ -255,8 +255,8 @@
                                             @endforeach
 
                                                 <div style="display: flex; align-items: center; justify-content: flex-end" class="card-footer">
-                                                    <button onclick="atualizarModalPrev()" type="button" id="nextBtn" class="btn btn-primary">Prev</button>
-                                                    <button style="margin-left: 1rem;" onclick="atualizarModalNext({{count($animalConsultations[$animal->id])}})" type="button" id="nextBtn" class="btn btn-primary">Next</button>
+                                                    <button onclick="atualizarModalPrev({{$animal->id}})" type="button" id="nextBtn" class="btn btn-primary">Prev</button>
+                                                    <button style="margin-left: 1rem;" onclick="atualizarModalNext({{count($animalConsultations[$animal->id])}}, {{$animal->id}})" type="button" id="nextBtn" class="btn btn-primary">Next</button>
                                                 </div>
 
                                         </div>
@@ -393,33 +393,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 
-        let currentStep = 0;
+        function atualizarModalPrev(animalId) {
+            const modal = $("#modalTratamentos" + animalId);
+            const currentStep = parseInt(modal.find(".card:visible").attr("data-current-step"));
 
-        function atualizarModalPrev() {
-
-            if(currentStep >= 1){
-                // Esconder o passo atual
-                $("#step" + currentStep).addClass("d-none");
-
-                // Decrementar para o próximo passo
-                currentStep--;
-
-                // Mostrar o próximo passo
-                $("#step" + currentStep).removeClass("d-none");
+            if (currentStep >= 1) {
+                modal.find("#step" + currentStep + animalId).addClass("d-none");
+                const newStep = currentStep - 1;
+                modal.find("#step" + newStep + animalId).removeClass("d-none").attr("data-current-step", newStep);
             }
         }
 
-        function atualizarModalNext(val) {
-            // alert(val);
-            if(currentStep < val-1){
-                // Esconder o passo atual
-                $("#step" + currentStep).addClass("d-none");
+        function atualizarModalNext(val, animalId) {
+            const modal = $("#modalTratamentos" + animalId);
+            const currentStep = parseInt(modal.find(".card:visible").attr("data-current-step"));
 
-                // Incrementar para o próximo passo
-                currentStep++;
-
-                // Mostrar o próximo passo
-                $("#step" + currentStep).removeClass("d-none");
+            if (currentStep < val - 1) {
+                modal.find("#step" + currentStep + animalId).addClass("d-none");
+                const newStep = currentStep + 1;
+                modal.find("#step" + newStep + animalId).removeClass("d-none").attr("data-current-step", newStep);
             }
         }
 
