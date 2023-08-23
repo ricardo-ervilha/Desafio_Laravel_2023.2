@@ -45,6 +45,14 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $request->validate([
+            'name' => [ 'string', 'max:255'],
+            'email' => [ 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => [ 'confirmed', Rules\Password::defaults()],
+            'publicPlace' => ['string', 'max:255'],
+            'district' => [ 'string', 'max:255'],
+        ]);
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {

@@ -493,9 +493,9 @@
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
     <script>
+        $('.cpf').mask('000.000.000-00');
         $('.cep').mask('00000-000');
         $('.phone').mask('(00) 00000-0000');
-        $('.cpf').mask('000.000.000-00');
 
         $(document).on('blur', '#cep', function(){
             const cep = $(this).val();
@@ -511,10 +511,24 @@
                         $('#city').val(data.localidade);
                         $('#street').val(data.logradouro);
                         $('#district').val(data.bairro);
+
+                        $('#uf').prop('disabled', false);
+                        $('#city').prop('disabled', false);
+                        $('#street').prop('disabled', false);
+                        $('#district').prop('disabled', false);
+
+                        if($('#uf').val() != ''){
+                            $('#uf').prop('disabled', true);
+                        }if($('#city').val() != ''){
+                            $('#city').prop('disabled', true);
+                        }if($('#street').val() != ''){
+                            $('#street').prop('disabled', true);
+                        }if($('#district').val() != ''){
+                            $('#district').prop('disabled', true);
+                        }
                     }
                 }
             });
         });
-
     </script>
 @stop

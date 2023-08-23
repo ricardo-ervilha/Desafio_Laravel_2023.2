@@ -1,2 +1,2 @@
-<img width="350"src="{{ asset('img/logo-fundotransp.png') }}" alt="">
+<img width="300"src="{{ asset('img/logo-fundotransp.png') }}" alt="">
 

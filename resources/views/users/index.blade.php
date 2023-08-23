@@ -380,6 +380,21 @@
                        $('#city').val(data.localidade);
                        $('#street').val(data.logradouro);
                        $('#district').val(data.bairro);
+
+                       $('#uf').prop('disabled', false);
+                       $('#city').prop('disabled', false);
+                       $('#street').prop('disabled', false);
+                       $('#district').prop('disabled', false);
+
+                       if($('#uf').val() != ''){
+                           $('#uf').prop('disabled', true);
+                       }if($('#city').val() != ''){
+                           $('#city').prop('disabled', true);
+                       }if($('#street').val() != ''){
+                           $('#street').prop('disabled', true);
+                       }if($('#district').val() != ''){
+                           $('#district').prop('disabled', true);
+                       }
                    }
                }
            });
