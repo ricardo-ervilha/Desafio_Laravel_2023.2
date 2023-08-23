@@ -29,7 +29,7 @@ class PdfController extends Controller
     {
 
         $consultations = Consultation::select('*')
-            ->whereYear('startDate', $request->year)
+            ->whereYear('startDate', request('year'))
             ->orderByRaw('MONTH(startDate) ASC')
             ->get();
 

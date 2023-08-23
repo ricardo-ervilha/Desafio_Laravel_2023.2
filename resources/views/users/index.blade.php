@@ -36,12 +36,14 @@
                 <div style="display: flex; justify-content: flex-end; align-items: center" class="col-sm">
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
+                            <form class="d-flex" action="/users/search" method="GET">
+                                <input type="text" name="search" class="form-control float-right" placeholder="Buscar">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <button style="margin-left: 1rem" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
@@ -242,7 +244,7 @@
                                                             <div style="padding-bottom: 0 !important;" class="card-body">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">Nome Completo</label>
-                                                                    <input disabled value="{{$user->name}}"  required name="name" type="text" class="form-control" id="name" placeholder="Digite o nome">
+                                                                    <input disabled value="{{$user->name}}"  required name="name" type="text" class="form-control" id="name{{$user->id}}" placeholder="Digite o nome">
                                                                 </div>
 
                                                                 <div class="form-group">
@@ -252,7 +254,7 @@
 
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Telefone</label>
-                                                                    <input disabled value="{{$user->phone}}" required name="phone" type="tel" maxlength="15" class="form-control phone" id="phone" placeholder="Digite o telefone">
+                                                                    <input disabled value="{{$user->phone}}" required name="phone" type="tel" maxlength="15" class="form-control phone" id="phone{{$user->id}}" placeholder="Digite o telefone">
                                                                 </div>
 
                                                                 <div class="form-group">
@@ -262,7 +264,7 @@
 
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">CEP</label>
-                                                                    <input disabled value="{{$user->address->cep}}" required maxlength="9" name="cep" type="text" class="form-control cep" id="cep" placeholder="Digite o cep">
+                                                                    <input disabled value="{{$user->address->cep}}" required maxlength="9" name="cep" type="text" class="form-control cep" id="cep{{$user->id}}" placeholder="Digite o cep">
                                                                 </div>
 
                                                             </div>
@@ -273,7 +275,7 @@
                                                             <div style="padding-bottom: 0 !important;" class="card-body">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Cidade</label>
-                                                                    <input disabled value="{{$user->address->city}}" required name="city" type="text" class="form-control" id="city" placeholder="Digite a cidade">
+                                                                    <input disabled value="{{$user->address->city}}" required name="city" type="text" class="form-control" id="city{{$user->id}}" placeholder="Digite a cidade">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Unidade Federativa</label>
@@ -284,15 +286,15 @@
 
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">Logradouro</label>
-                                                                    <input disabled value="{{$user->address->publicPlace}}" required name="publicPlace" type="text" class="form-control" id="street" placeholder="Digite o logradouro">
+                                                                    <input disabled value="{{$user->address->publicPlace}}" required name="publicPlace" type="text" class="form-control" id="street{{$user->id}}" placeholder="Digite o logradouro">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Bairro</label>
-                                                                    <input disabled value="{{$user->address->district}}"  required name="district" type="text" class="form-control" id="district" placeholder="Digite o bairro">
+                                                                    <input disabled value="{{$user->address->district}}"  required name="district" type="text" class="form-control" id="district{{$user->id}}" placeholder="Digite o bairro">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Número</label>
-                                                                    <input disabled value="{{$user->address->num}}" required name="num" type="number" class="form-control" id="num" placeholder="Digite o número">
+                                                                    <input disabled value="{{$user->address->num}}" required name="num" type="number" class="form-control" id="num{{$user->id}}" placeholder="Digite o número">
                                                                 </div>
 
                                                             </div>
@@ -347,11 +349,7 @@
 
         <div class="card-footer clearfix">
             <ul class="pagination pagination-sm m-0 float-right">
-                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                {{$users->links()}}
             </ul>
         </div>
 

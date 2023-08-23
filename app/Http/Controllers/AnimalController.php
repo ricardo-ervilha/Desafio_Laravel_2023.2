@@ -11,9 +11,25 @@ use Illuminate\Support\Facades\DB;
 
 class AnimalController extends Controller
 {
+    public function search(Request $request){
+        $search = request('search');
+
+        $animals = Animal::where('name', 'like', '%'.$search.'%')->paginate(10);
+
+        $owners = Owner::all();
+        $animalConsultations = null;
+        foreach($animals as $animal){
+            $animalConsultations[$animal->id] = $consultations = DB::table('consultations')
+                ->join('treatments', 'consultations.treatment_id', '=', 'treatments.id')
+                ->where('consultations.animal_id', '=', $animal->id)->get();
+        }
+
+        return view('animals.index')->with('animals', $animals)->with('owners', $owners)->with('animalConsultations', $animalConsultations);
+    }
+
     public function index()
     {
-        $animals = Animal::all();
+        $animals = Animal::paginate(10);
         $owners = Owner::all();
         $animalConsultations = null;
         foreach($animals as $animal){
@@ -60,6 +76,11 @@ class AnimalController extends Controller
         $animal = Animal::find($request->id);
 
         DB::beginTransaction();
+
+        $consults = Consultation::where('animal_id', $animal->id)->get();
+        foreach($consults as $consult){
+            $consult->delete();
+        }
 
         $animal->delete();
 

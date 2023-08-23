@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Animal;
+use App\Models\Consultation;
 use App\Models\Owner;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,9 +14,18 @@ use Illuminate\Support\Facades\Hash;
 class OwnerController extends Controller
 {
 
+    public function search(Request $request){
+        $search = request('search');
+
+        $owners = Owner::where('name', 'like', '%'.$search.'%')->paginate(10);
+
+        return view('owners.index')->with('owners', $owners);
+    }
+
     public function index()
     {
-        $owners = Owner::all();
+        $owners = Owner::paginate(10);
+
         return view('owners.index')->with('owners', $owners);
     }
 
@@ -87,6 +97,10 @@ class OwnerController extends Controller
         $animals = $owner->animals;
 
         foreach($animals as $animal){
+            $consults = Consultation::where('animal_id', $animal->id)->get();
+            foreach($consults as $consult){
+                $consult->delete();
+            }
             $animal->delete();
         }
 

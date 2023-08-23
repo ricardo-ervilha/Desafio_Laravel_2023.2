@@ -36,18 +36,21 @@ Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'vie
 Route::get('/users', [ProfileController::class, 'index'])->name('users.index')->can('isAdmin', '\App\Models\User');
 Route::post('/users/store', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])->name('users.create')->can('isAdmin', '\App\Models\User');
 Route::post('/users/delete/{id}', [ProfileController::class, 'delete'])->can('isAdmin', '\App\Models\User');
+Route::get('/users/search', [ProfileController::class, 'search'])->can('isAdmin', '\App\Models\User');
 
 /*Rotas de Gerenciamento de Proprietários*/
 Route::get('/owners', [\App\Http\Controllers\OwnerController::class, 'index'])->name('owners.index');
 Route::post('/owners/store', [\App\Http\Controllers\OwnerController::class, 'store'])->name('owners.create');
 Route::post('/owners/delete/{id}', [\App\Http\Controllers\OwnerController::class, 'delete']);
 Route::post('/owners/edit/{id}', [\App\Http\Controllers\OwnerController::class, 'edit']);
+Route::get('/owners/search', [\App\Http\Controllers\OwnerController::class, 'search']);
 
 /*Rotas de Gerenciamento de Animais*/
 Route::get('/animals', [\App\Http\Controllers\AnimalController::class, 'index']);
 Route::post('/animals/create', [\App\Http\Controllers\AnimalController::class, 'create']);
 Route::post('/animals/delete/{id}', [\App\Http\Controllers\AnimalController::class, 'delete']);
 Route::post('/animals/edit/{id}', [\App\Http\Controllers\AnimalController::class, 'edit']);
+Route::get('/animals/search', [\App\Http\Controllers\AnimalController::class, 'search']);
 
 /*Rotas de Consultas*/
 Route::get('/consultations', [\App\Http\Controllers\ConsultationController::class, 'index']);
@@ -61,6 +64,6 @@ Route::post('/email/send', [\App\Http\Controllers\MailController::class, 'send']
 
 /*Geração do Relatório*/
 Route::get('/pdf/index', [\App\Http\Controllers\PdfController::class, 'index']);
-Route::post('/pdf/generate', [\App\Http\Controllers\PdfController::class, 'generate']);
+Route::get('/pdf/generate', [\App\Http\Controllers\PdfController::class, 'generate']);
 
 require __DIR__.'/auth.php';

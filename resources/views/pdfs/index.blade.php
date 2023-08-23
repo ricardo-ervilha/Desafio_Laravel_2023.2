@@ -7,8 +7,7 @@
 @stop
 
 @section('content')
-    <form action="/pdf/generate" method="POST">
-        @csrf
+    <form action="/pdf/generate" method="GET">
         <div class="form-group">
             <label for="exampleInputEmail1">Ano</label>
             <select style="width: 22%;" id="year" name="year" class="form-control">

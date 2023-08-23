@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Address;
+use App\Models\Consultation;
 use App\Models\User;
 use http\Client\Response;
 use Illuminate\Http\RedirectResponse;
@@ -19,9 +20,17 @@ class ProfileController extends Controller
      * Display the user's profile form.
      */
 
+    public function search(Request $request){
+        $search = request('search');
+
+        $users = User::where('name', 'like', '%'.$search.'%')->paginate(10);
+
+        return view('users.index')->with('users', $users);
+    }
+
     public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::paginate(10);
         return view('users.index')->with('users', $users);
     }
     public function edit(Request $request): View
@@ -72,6 +81,10 @@ class ProfileController extends Controller
     {
         $user = User::find($request->id);
         DB::beginTransaction();
+        $consults = Consultation::where('user_id', $user->id)->get();
+        foreach($consults as $consult){
+            $consult->delete();
+        }
         $user->address()->delete();
         $user->delete();
         DB::commit();

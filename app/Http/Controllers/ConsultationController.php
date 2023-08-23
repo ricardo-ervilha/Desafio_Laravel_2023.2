@@ -16,7 +16,7 @@ class ConsultationController extends Controller
     public function index()
     {
         $owners = Owner::all();
-        $consultations = Consultation::all();
+        $consultations = Consultation::paginate(10);
         $animals = $owners[0]->animals;
         return view('consultations.index')->with('consultations', $consultations)->with('owners', $owners)->with('animals', $animals);
     }

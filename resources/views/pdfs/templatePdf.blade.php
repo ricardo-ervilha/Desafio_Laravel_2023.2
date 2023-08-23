@@ -9,7 +9,6 @@
             margin: 0;
             padding: 0;
             font-family: sans-serif;
-            background-color: #f8f8f8;
         }
 
         .header{
@@ -106,14 +105,15 @@
             margin-bottom: -0.1rem;
         }
 
-        .img{
-            text-align: center;
+        footer img{
+            position: fixed;
+            left: 0;
         }
 
         .assinature{
-            position:absolute;
-            left: 190px;
-            bottom: 0px;
+            display: block;
+            text-align: center;
+            vertical-align: bottom;
         }
     </style>
 </head>
@@ -123,7 +123,7 @@
     </div>
 
 
-    <div class="img"><img width="300" src="{{base_path()}}\public\img\logo-fundotransp.png" alt=""></div>
+{{--    <div class="img"><img width="300" src="{{base_path()}}\public\img\logo-fundotransp.png" alt=""></div>--}}
 
     <div class="data">
         <div class="sec1">
@@ -165,9 +165,12 @@
                 @endforeach
             </table>
         @endif
-        <footer> <span>© 2023 Laravel PetClinic. All Rights Reserved.</span> <span class="page"></span></footer>
+        <footer>
+            <img width="35" src="{{base_path()}}\public\img\logo-admin.png" alt="">
+            <span>© 2023 Laravel PetClinic. All Rights Reserved.</span>
+            <span class="page"></span></footer>
     @endfor
 
-    <div class="assinature"><img src="{{base_path()}}\public\img\assinatura.png" alt=""></div>
+    <div class="assinature"><img src="{{base_path()}}\public\img\assinatura-transparente.png" alt=""></div>
 </body>
 </html>
