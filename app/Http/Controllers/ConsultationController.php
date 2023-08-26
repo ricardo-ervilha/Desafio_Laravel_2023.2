@@ -50,9 +50,9 @@ class ConsultationController extends Controller
         foreach($consultations as $consult){
 
             if($request->startDate >= $consult->startDate && $request->startDate < $consult->endDate){
-                return back()->with('message', 'Conflito de horário!');
+                return back()->with('message-error', 'Conflito de horário!');
             }else if($request->startDate <= $consult->startDate && $request->endDate > $consult->startDate){
-                return back()->with('message', 'Conflito de horário!');
+                return back()->with('message-error', 'Conflito de horário!');
             }
         }
 
