@@ -518,13 +518,13 @@
                         $('#district').prop('disabled', false);
 
                         if($('#uf').val() != ''){
-                            $('#uf').prop('disabled', true);
+                            $('#uf').attr('readonly', true);
                         }if($('#city').val() != ''){
-                            $('#city').prop('disabled', true);
+                            $('#city').attr('readonly', true);
                         }if($('#street').val() != ''){
-                            $('#street').prop('disabled', true);
+                            $('#street').attr('readonly', true);
                         }if($('#district').val() != ''){
-                            $('#district').prop('disabled', true);
+                            $('#district').attr('readonly', true);
                         }
                     }
                 }

@@ -259,7 +259,7 @@
 
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Período de Trabalho</label>
-                                                                    <input disabled value="{{$user->workTime}}"  required name="workTime" type="number" class="form-control" id="workTime" placeholder="Digite o período">
+                                                                    <input disabled value="{{$user->workTime}}" min="1" max="24"  required name="workTime" type="number" class="form-control" id="workTime" placeholder="Digite o período">
                                                                 </div>
 
                                                                 <div class="form-group">
@@ -387,13 +387,13 @@
                        $('#district').prop('disabled', false);
 
                        if($('#uf').val() != ''){
-                           $('#uf').prop('disabled', true);
+                           $('#uf').attr('readonly', true);
                        }if($('#city').val() != ''){
-                           $('#city').prop('disabled', true);
+                           $('#city').attr('readonly', true);
                        }if($('#street').val() != ''){
-                           $('#street').prop('disabled', true);
+                           $('#street').attr('readonly', true);
                        }if($('#district').val() != ''){
-                           $('#district').prop('disabled', true);
+                           $('#district').attr('readonly', true);
                        }
                    }
                }
