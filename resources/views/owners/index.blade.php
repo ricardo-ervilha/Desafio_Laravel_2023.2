@@ -98,7 +98,7 @@
                                                 <label for="exampleInputFile">Foto de Perfil</label>
                                                 <div class="input-group">
                                                     <div class="custom-file">
-                                                        <input name="profilePhoto" class="form-control" type="file" id="profilePhoto">
+                                                        <input name="image" class="form-control" type="file" id="profilePhoto">
                                                         <label for="formFile" class="form-label"></label>
                                                     </div>
                                                 </div>
@@ -220,7 +220,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="image text-center">
-                                                <img src="{{$owner->profilePhoto == null ? asset('/storage/avatars/sem-imagem.jpg') :  asset("/storage/{$owner->profilePhoto}")}}" class="img-thumbnail" height="auto" width="150px">
+                                                <img src="{{$owner->profilePhoto == null ? asset('/img/avatars/sem-imagem.jpg') :  asset("/img/avatars/{$owner->profilePhoto}")}}" class="img-thumbnail" height="auto" width="150px">
                                             </div>
 
                                             <div class="card card-primary">
@@ -354,7 +354,7 @@
                                                                     <label for="exampleInputFile">Foto de Perfil</label>
                                                                     <div class="input-group">
                                                                         <div class="custom-file">
-                                                                            <input name="profilePhoto" class="form-control" type="file" id="profilePhoto">
+                                                                            <input name="image" class="form-control" type="file" id="profilePhoto">
                                                                             <label for="formFile" class="form-label"></label>
                                                                         </div>
                                                                     </div>

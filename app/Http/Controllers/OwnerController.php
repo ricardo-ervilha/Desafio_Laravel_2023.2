@@ -45,14 +45,15 @@ class OwnerController extends Controller
             'num' => ['required'],
         ]);
 
-        $profilePhoto = null;
+        $imageName = null;
 
-        if($request->hasFile('profilePhoto')){
+        if($request->hasFile('image')){
 
-            $profilePhoto = $request->file('profilePhoto')->store('public/avatars');
-
+            $requestImage = $request->image;
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $request->image->move(public_path('img/avatars'), $imageName);
         }
-        $profilePhoto = str_replace("public/", "", $profilePhoto);
 
         DB::beginTransaction();
 
@@ -74,7 +75,7 @@ class OwnerController extends Controller
             'phone' => $request->phone,
             'cpf' => $request->cpf,
             'isAdmin' => false,
-            'profilePhoto' => $profilePhoto
+            'profilePhoto' => $imageName
         ]);
 
         $owner->address()->associate($address);
@@ -126,23 +127,34 @@ class OwnerController extends Controller
 
         $owner = Owner::find($request->id);
 
-        $profilePhoto = null;
+        $imageName = null;
 
-        if($request->hasFile('profilePhoto')){
+        if($request->hasFile('image')){
 
-            $profilePhoto = $request->file('profilePhoto')->store('public/avatars');
-
+            $requestImage = $request->image;
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $request->image->move(public_path('img/avatars'), $imageName);
         }
-        $profilePhoto = str_replace("public/", "", $profilePhoto);
+        if($imageName != null){
+            $owner->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'dateBirth' => $request->dateBirth,
+                'phone' => $request->phone,
+                'cpf' => $request->cpf,
+                'profilePhoto' => $imageName
+            ]);
+        }else{
+            $owner->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'dateBirth' => $request->dateBirth,
+                'phone' => $request->phone,
+                'cpf' => $request->cpf,
+            ]);
+        }
 
-        $owner->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'dateBirth' => $request->dateBirth,
-            'phone' => $request->phone,
-            'cpf' => $request->cpf,
-            'profilePhoto' => $profilePhoto
-        ]);
 
         $owner->address()->update([
             'cep' => $request->cep,
