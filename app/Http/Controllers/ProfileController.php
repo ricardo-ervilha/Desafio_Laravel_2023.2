@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Address;
 use App\Models\Consultation;
+use App\Models\Treatment;
 use App\Models\User;
 use http\Client\Response;
 use Illuminate\Http\RedirectResponse;
@@ -91,7 +92,9 @@ class ProfileController extends Controller
         DB::beginTransaction();
         $consults = Consultation::where('user_id', $user->id)->get();
         foreach($consults as $consult){
+            $treatmentId = $consult->treatment->id;
             $consult->delete();
+            Treatment::destroy($treatmentId);
         }
         $user->address()->delete();
         $user->delete();

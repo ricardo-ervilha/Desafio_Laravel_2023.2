@@ -242,12 +242,12 @@
                                                             <div style="padding-bottom: 0 !important;" class="card-body">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">Diagnóstico</label>
-                                                                    <textarea name="diagnostic" id="diagnostic{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite o diagnóstico"></textarea>
+                                                                    <textarea name="diagnostic" {{$consultation->treatment == null ? '' : 'readonly'}} id="diagnostic{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite o diagnóstico">{{$consultation->treatment == null ? '' : $consultation->treatment->diagnostic}}</textarea>
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">Orientações</label>
-                                                                    <textarea name="guidelines" id="guidelines{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite as orientações"></textarea>
+                                                                    <textarea name="guidelines" {{$consultation->treatment == null ? '' : 'readonly'}} id="guidelines{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite as orientações">{{$consultation->treatment == null ? '' : $consultation->treatment->guidelines}}</textarea>
                                                                 </div>
 
 
@@ -260,12 +260,12 @@
 
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">Medicamentos</label>
-                                                                    <textarea name="medicines" id="medicines{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite os medicamentos"></textarea>
+                                                                    <textarea name="medicines" id="medicines{{$consultation->id}}" {{$consultation->treatment == null ? '' : 'readonly'}}  class="form-control" rows="3" placeholder="Digite os medicamentos">{{$consultation->treatment == null ? '' : $consultation->treatment->medicines}}</textarea>
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">Informações Adicionais</label>
-                                                                    <textarea name="extraInfos" id="extraInfos{{$consultation->id}}" class="form-control" rows="3" placeholder="Digite as informações adicionais"></textarea>
+                                                                    <textarea name="extraInfos" id="extraInfos{{$consultation->id}}" {{$consultation->treatment == null ? '' : 'readonly'}} class="form-control" rows="3" placeholder="Digite as informações adicionais">{{$consultation->treatment == null ? '' : $consultation->treatment->extraInfos}}</textarea>
                                                                 </div>
 
                                                             </div>

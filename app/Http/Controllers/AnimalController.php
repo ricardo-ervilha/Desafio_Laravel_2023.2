@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Animal;
 use App\Models\Consultation;
 use App\Models\Owner;
+use App\Models\Treatment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -79,7 +80,9 @@ class AnimalController extends Controller
 
         $consults = Consultation::where('animal_id', $animal->id)->get();
         foreach($consults as $consult){
+            $treatmentId = $consult->treatment->id;
             $consult->delete();
+            Treatment::destroy($treatmentId);
         }
 
         $animal->delete();
