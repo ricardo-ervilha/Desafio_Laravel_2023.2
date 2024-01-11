@@ -17,8 +17,10 @@
                     <div class="card-header">{{$owner->name}}</div>
 
                     <div class="card-body">
-                        {{$owner->email}}
+                        {{$owner->email}} <br>
                         {{$owner->dateBirth}}
+                        <br>
+{{--                        {{$owner->cpf}}--}}
                     </div>
                 </div>
             </div>

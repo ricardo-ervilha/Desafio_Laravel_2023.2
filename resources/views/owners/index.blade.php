@@ -71,7 +71,7 @@
                                         <div style="padding-bottom: 0 !important;" class="card-body">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Nome Completo</label>
-                                                <input required name="name" type="text" class="form-control" id="name" placeholder="Digite o nome">
+                                                <input name="name" type="text" class="form-control" id="name" placeholder="Digite o nome">
                                             </div>
 
                                             <div class="form-group">
