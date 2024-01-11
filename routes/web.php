@@ -44,6 +44,7 @@ Route::post('/owners/store', [\App\Http\Controllers\OwnerController::class, 'sto
 Route::post('/owners/delete/{id}', [\App\Http\Controllers\OwnerController::class, 'delete']);
 Route::post('/owners/edit/{id}', [\App\Http\Controllers\OwnerController::class, 'edit']);
 Route::get('/owners/search', [\App\Http\Controllers\OwnerController::class, 'search']);
+Route::get('/owners/{id}', [\App\Http\Controllers\OwnerController::class, 'show']);
 
 /*Rotas de Gerenciamento de Animais*/
 Route::get('/animals', [\App\Http\Controllers\AnimalController::class, 'index']);

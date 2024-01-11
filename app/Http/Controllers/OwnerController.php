@@ -22,6 +22,15 @@ class OwnerController extends Controller
         return view('owners.index')->with('owners', $owners);
     }
 
+    public function show(Request $request)
+    {
+        $id = request('id');
+
+        $owner = Owner::find($id);
+
+        return view('owners.show')->with('owner', $owner);
+    }
+
     public function index()
     {
         $owners = Owner::paginate(10);
